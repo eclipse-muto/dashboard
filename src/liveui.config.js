@@ -30,8 +30,8 @@ const config = {
         "uuid": require('uuid'),
     },
     remotes: {
-        "dashboard-device": process.env.NODE_ENV === 'DEBUG' ? 'http://localhost:5005/dashboard-device' : '/dashboard-device',
-        "dashboard-stack":  process.env.NODE_ENV === 'DEBUG' ? 'http://localhost:5006/dashboard-stack' : '/dashboard-stack',
+        "dashboard-device": global.__DEV__  ? 'http://localhost:5005/dashboard-device' : '/dashboard-device',
+        "dashboard-stack":  global.__DEV__  ? 'http://localhost:5006/dashboard-stack' : '/dashboard-stack',
     },
 }
 

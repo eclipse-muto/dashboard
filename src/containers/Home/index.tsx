@@ -15,86 +15,28 @@
 //
 //
 import React from 'react';
-import {
-  Badge,
-  Flex,
-} from '@patternfly/react-core';
-import { useLazyQuery } from '@apollo/client';
-import { GETACTIVEMODEL } from '../../api/query/model';
 
-import { useLocation } from 'react-router-dom';
-import Test from '../Test';
-import NodeGallery from '../../components/NodeGallery';
-import CustomHeader from '../../components/CustomHeader';
-import SimpleTabs from '../../components/SimpleTabs';
-import ModelDetails from '../../components/ModelDetails';
-import RemoteComponent from "@eclipse-muto/liveui-react";
+import { Flex, Panel, PanelMain, PanelMainBody } from '@patternfly/react-core';
+
+
+import RemoteComponent from '@eclipse-muto/liveui-react';
+
+
+const VehicleSummary = props => <RemoteComponent form={{ component: "VehicleSummary", from: "liveui-dashboard-vehicle" }} {...props} />
+
 
 const Home: React.FunctionComponent = () => {
 
-  const [getActiveModel, { data: activeModel }] = useLazyQuery(GETACTIVEMODEL);
-
-
-  const location = useLocation();
-
-  const Monitoring = props =>  <RemoteComponent name="monitoring" {...props} />
-
-  React.useEffect(() => {
-
-    getActiveModel()
-
-  }, [location, getActiveModel, activeModel])
-
   return (
-    <>
-      <CustomHeader title={activeModel?.activeModel?.name} description="Node details, node graph and the model details of the active model are shown below."
-        extras={
-          <>
-            {' Nodes: '}
-            <Badge key={1}>{activeModel?.activeModel?.nodes?.length}</Badge>
-          </>
-        }
-        banner={
-          <Flex
-            justifyContent={{ default: 'justifyContentCenter', lg: 'justifyContentSpaceBetween' }}
-            flexWrap={{ default: 'nowrap' }}
-          >
-            <div className="pf-u-display-none pf-u-display-block-on-lg">Localhost</div>
-            <div className="pf-u-display-none pf-u-display-block-on-lg">
-              Nodes in model: {activeModel?.activeModel?.nodes?.length}
-            </div>
-            <div className="pf-u-display-none-on-lg">Context: {activeModel?.activeModel?.activeContext}</div>
-            <div className="pf-u-display-none-on-lg">Model: {activeModel?.activeModel?.id}</div>
+    <Panel variant="raised">
+      <PanelMain>
+        <PanelMainBody>
+          <Flex>
+            <VehicleSummary />
           </Flex>
-        }
-      />
-
-      <SimpleTabs
-        tabs=
-        {
-          [
-            {
-              "title": "Graph",
-              "component": <Test />
-            },
-            {
-              "title": "Nodes",
-              "component":  <Monitoring />
-            },
-            {
-              "title": "Details",
-              "component": <ModelDetails model={activeModel?.activeModel} />
-            },
-            {
-              "title": "Events",
-              "component": "Events"
-            },
-          ]
-        }
-      />
-      {/* <NodeGallery /> */}
-      {/* <Test /> */}
-    </>
+        </PanelMainBody>
+      </PanelMain>
+    </Panel>
   );
 }
 

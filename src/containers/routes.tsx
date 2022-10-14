@@ -24,13 +24,22 @@ import NotFound from './NotFound';
 import { useDocumentTitle } from '../utils/useDocumentTitle';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 import RemoteComponent from '@eclipse-muto/liveui-react';
+import Breadcrumbs from '../components/Breadcrumbs';
+import Home from './Home';
 
 const Stack = props =>  <RemoteComponent name="stack" {...props} />
 const StackDetail = props =>  <RemoteComponent name="sdetail" {...props} />
-const Vehicle = props =>  <RemoteComponent name="vehicle" {...props} />
-const VehicleDetail = props =>  <RemoteComponent name="vdetail" {...props} />
-const VStack = props =>  <RemoteComponent name="vstack" {...props} />
-// const RosActions = props =>  <RemoteComponent name="rosActions" {...props} />
+const Vehicle = props =>  <RemoteComponent form={{component: "Vehicle", from: "liveui-dashboard-vehicle"}} {...props} />
+const VehicleDetail = props =>  <RemoteComponent form={{component: "VehicleDetail", from: "liveui-dashboard-vehicle"}} {...props} />
+const VehicleStack = props =>  <RemoteComponent form={{component: "VehicleStack", from: "liveui-dashboard-vehicle"}} {...props} />
+const TopicEcho= props =>  <RemoteComponent  form={{component: "TopicEcho", from: "liveui-dashboard-vehicle"}}  {...props} />
+const TopicList= props =>  <RemoteComponent  form={{component: "TopicList", from: "liveui-dashboard-vehicle"}}  {...props} />
+const TopicDetail= props =>  <RemoteComponent  form={{component: "TopicDetail", from: "liveui-dashboard-vehicle"}}  {...props} />
+const NodeList= props =>  <RemoteComponent  form={{component: "NodeList", from: "liveui-dashboard-vehicle"}}  {...props} />
+const NodeDetail= props =>  <RemoteComponent  form={{component: "NodeDetail", from: "liveui-dashboard-vehicle"}}  {...props} />
+const ParamList= props =>  <RemoteComponent  form={{component: "ParamList", from: "liveui-dashboard-vehicle"}}  {...props} />
+const ParamDetail= props =>  <RemoteComponent  form={{component: "ParamDetail", from: "liveui-dashboard-vehicle"}}  {...props} />
+
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -53,13 +62,13 @@ export interface IAppRouteGroup {
 export type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
 const routes: any[] = [
-  /*{
+  {
     component: Home,
     exact: true,
-    label: 'Home - Active System',
+    label: 'Home',
     path: '/',
     title: 'Eclipse Muto | Main Dashboard',
-  },*/
+  },
   {
     component: Stack,
     exact: true,
@@ -72,32 +81,88 @@ const routes: any[] = [
     component: StackDetail,
     exact: true,
     isAsync: true,
-    path: '/stackdetail',
+    path: '/stackdetail/:thingid',
     title: 'Eclipse Muto | Stack Panel Page',
   },
   {
     component: Vehicle,
     exact: true,
     isAsync: true,
-    label: 'Vehicle Panel',
-    path: '/',
-    title: 'Eclipse Muto | Vehicle Panel Page',
+    label: 'Vehicles',
+    path: '/vehicle',
+    title: 'Eclipse Muto | Vehicles',
   },
   {
     component: VehicleDetail,
     exact: true,
     isAsync: true,
     //label: 'Vehicle Detail',
-    path: '/vehicledetail',
+    path: '/vehicle/:thingid',
     title: 'Eclipse Muto | Vehicle Detail',
   },
   {
-    component: VStack,
+    component: VehicleStack,
     exact: true,
     isAsync: true,
     //label: 'Vehicle Stacks',
-    path: '/vstack',
+    path: '/vehicle/:thingid/stacks',
     title: 'Eclipse Muto | Vehicle Stack Management',
+  },
+  {
+    component:TopicList,
+    exact: true,
+    isAsync: true,
+    //label: 'Vehicle ros actions',
+    path: '/vehicle/:thingid/topics',
+    title: 'Eclipse Muto | Ros Topics',
+  },
+  {
+    component: TopicDetail,
+    exact: true,
+    isAsync: true,
+    //label: 'Vehicle ros actions',
+    path: '/vehicle/:thingid/topics/:topic',
+    title: 'Eclipse Muto | Ros Topic Detail',
+  },
+  {
+    component: TopicEcho,
+    exact: true,
+    isAsync: true,
+    //label: 'Vehicle ros actions',
+    path: '/vehicle/:thingid/echo',
+    title: 'Eclipse Muto | Ros Topic Echo',
+  },
+  {
+    component: NodeList,
+    exact: true,
+    isAsync: true,
+    //label: 'Vehicle ros actions',
+    path: '/vehicle/:thingid/nodes',
+    title: 'Eclipse Muto | Ros Nodes',
+  },
+  {
+    component: NodeDetail,
+    exact: true,
+    isAsync: true,
+    //label: 'Vehicle ros actions',
+    path: '/vehicle/:thingid/nodes/:node',
+    title: 'Eclipse Muto | Ros Node Detail',
+  },
+  {
+    component: ParamList,
+    exact: true,
+    isAsync: true,
+    //label: 'Vehicle ros actions',
+    path: '/vehicle/:thingid/params',
+    title: 'Eclipse Muto | Ros Parameters',
+  },
+  {
+    component: ParamDetail,
+    exact: true,
+    isAsync: true,
+    //label: 'Vehicle ros actions',
+    path: '/vehicle/:thingid/params/:param',
+    title: 'Eclipse Muto | Ros Parameter Detail',
   },
   /*{
     component: RosActions,
@@ -138,7 +203,7 @@ const RouteWithTitleUpdates = ({ component: Component, isAsync = false, title, .
   useDocumentTitle(title);
 
   function routeWithTitle(routeProps: RouteComponentProps) {
-    return <Component {...rest} {...routeProps} />;
+    return <> <Breadcrumbs /><Component {...rest} {...routeProps} /></>;
   }
 
   return <Route render={routeWithTitle} {...rest} />;

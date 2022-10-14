@@ -14,16 +14,15 @@
 //    Composiv.ai, Eteration A.S. - initial API and implementation
 //
 //
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-import '@patternfly/patternfly/patternfly.css';
-import liveuiConfig from './liveui.config';
-import liveui from '@eclipse-muto/liveui-core';
+import "@patternfly/patternfly/patternfly.css";
+import liveuiConfig from "./liveui.config";
+import liveui from "@eclipse-muto/liveui-core";
 
 liveui.initializeApp(liveuiConfig);
 
@@ -31,7 +30,7 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

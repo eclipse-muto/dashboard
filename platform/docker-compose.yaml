@@ -1,0 +1,40 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  dashboard-device:
+    image: eclipse-muto/dashboard-device:latest
+    environment:
+      NODE_ENV: PROD
+    ports:
+      - 5005:80
+    networks:
+        - muto-cloud
+
+  dashboard-stack:
+    image: eclipse-muto/dashboard-stack:latest
+    environment:
+      NODE_ENV: PROD
+    ports:
+      - 5006:80
+    networks:
+        - muto-cloud
+
+  dashboard:
+    image: eclipse-muto/dashboard:latest
+    environment:
+      NODE_ENV: PROD
+    ports:
+      - 7000:80
+    networks:
+        - muto-cloud
+    links:
+      -  dashboard-stack
+      -  dashboard-device
+    depends_on:
+      -  dashboard-stack
+      -  dashboard-device
+networks:
+    muto-cloud:
+        driver: bridge

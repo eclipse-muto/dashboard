@@ -27,18 +27,18 @@ import RemoteComponent from '@eclipse-muto/liveui-react';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Home from './Home';
 
-const Stack = props =>  <RemoteComponent name="stack" {...props} />
-const StackDetail = props =>  <RemoteComponent name="sdetail" {...props} />
-const Vehicle = props =>  <RemoteComponent form={{component: "Vehicle", from: "liveui-dashboard-vehicle"}} {...props} />
-const VehicleDetail = props =>  <RemoteComponent form={{component: "VehicleDetail", from: "liveui-dashboard-vehicle"}} {...props} />
-const VehicleStack = props =>  <RemoteComponent form={{component: "VehicleStack", from: "liveui-dashboard-vehicle"}} {...props} />
-const TopicEcho= props =>  <RemoteComponent  form={{component: "TopicEcho", from: "liveui-dashboard-vehicle"}}  {...props} />
-const TopicList= props =>  <RemoteComponent  form={{component: "TopicList", from: "liveui-dashboard-vehicle"}}  {...props} />
-const TopicDetail= props =>  <RemoteComponent  form={{component: "TopicDetail", from: "liveui-dashboard-vehicle"}}  {...props} />
-const NodeList= props =>  <RemoteComponent  form={{component: "NodeList", from: "liveui-dashboard-vehicle"}}  {...props} />
-const NodeDetail= props =>  <RemoteComponent  form={{component: "NodeDetail", from: "liveui-dashboard-vehicle"}}  {...props} />
-const ParamList= props =>  <RemoteComponent  form={{component: "ParamList", from: "liveui-dashboard-vehicle"}}  {...props} />
-const ParamDetail= props =>  <RemoteComponent  form={{component: "ParamDetail", from: "liveui-dashboard-vehicle"}}  {...props} />
+const Stack = props =>  <RemoteComponent form={{component: "Stack", from: "dashboard-stack"}} {...props} />
+
+const Vehicle = props =>  <RemoteComponent form={{component: "Vehicle", from: "dashboard-device"}} {...props} />
+const VehicleDetail = props =>  <RemoteComponent form={{component: "VehicleDetail", from: "dashboard-device"}} {...props} />
+const VehicleStack = props =>  <RemoteComponent form={{component: "VehicleStack", from: "dashboard-device"}} {...props} />
+const TopicEcho= props =>  <RemoteComponent  form={{component: "TopicEcho", from: "dashboard-device"}}  {...props} />
+const TopicList= props =>  <RemoteComponent  form={{component: "TopicList", from: "dashboard-device"}}  {...props} />
+const TopicDetail= props =>  <RemoteComponent  form={{component: "TopicDetail", from: "dashboard-device"}}  {...props} />
+const NodeList= props =>  <RemoteComponent  form={{component: "NodeList", from: "dashboard-device"}}  {...props} />
+const NodeDetail= props =>  <RemoteComponent  form={{component: "NodeDetail", from: "dashboard-device"}}  {...props} />
+const ParamList= props =>  <RemoteComponent  form={{component: "ParamList", from: "dashboard-device"}}  {...props} />
+const ParamDetail= props =>  <RemoteComponent  form={{component: "ParamDetail", from: "dashboard-device"}}  {...props} />
 
 
 let routeFocusTimer: number;
@@ -73,16 +73,9 @@ const routes: any[] = [
     component: Stack,
     exact: true,
     isAsync: true,
-    label: 'Stack Panel',
+    label: 'Stacks',
     path: '/stack',
-    title: 'Eclipse Muto | Stack Panel Page',
-  },
-  {
-    component: StackDetail,
-    exact: true,
-    isAsync: true,
-    path: '/stackdetail/:thingid',
-    title: 'Eclipse Muto | Stack Panel Page',
+    title: 'Eclipse Muto | Stacks',
   },
   {
     component: Vehicle,

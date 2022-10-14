@@ -30,7 +30,8 @@ const config = {
         "uuid": require('uuid'),
     },
     remotes: {
-       "liveui-dashboard-vehicle": 'http://localhost:5005/liveui-dashboard-vehicle',
+        "dashboard-device": process.env.NODE_ENV === 'DEBUG' ? 'http://localhost:5005/dashboard-device' : '/dashboard-device',
+        "dashboard-stack":  process.env.NODE_ENV === 'DEBUG' ? 'http://localhost:5006/dashboard-stack' : '/dashboard-stack',
     },
 }
 

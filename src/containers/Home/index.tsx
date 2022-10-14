@@ -22,7 +22,8 @@ import { Flex, Panel, PanelMain, PanelMainBody } from '@patternfly/react-core';
 import RemoteComponent from '@eclipse-muto/liveui-react';
 
 
-const VehicleSummary = props => <RemoteComponent form={{ component: "VehicleSummary", from: "liveui-dashboard-vehicle" }} {...props} />
+const VehicleSummary = props => <RemoteComponent form={{ component: "VehicleSummary", from: "dashboard-device" }} {...props} />
+const StackSummary = props => <RemoteComponent form={{ component: "StackSummary", from: "dashboard-stack" }} {...props} />
 
 
 const Home: React.FunctionComponent = () => {
@@ -33,6 +34,7 @@ const Home: React.FunctionComponent = () => {
         <PanelMainBody>
           <Flex>
             <VehicleSummary />
+            <StackSummary />
           </Flex>
         </PanelMainBody>
       </PanelMain>

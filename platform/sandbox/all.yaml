@@ -1,0 +1,135 @@
+##  CONFIG MAP,  SERVICE,  DEPLOYMENT, INGRESS....
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard
+spec:
+  selector:
+    app: dashboard-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard-app
+  template:
+    metadata:
+      labels:
+        app: dashboard-app
+    spec:
+      containers:
+        - image: eteration/muto-dashboard:v202210181705
+          imagePullPolicy: Always
+          name: dashboard
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: http
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-device
+spec:
+  selector:
+    app: dashboard-device-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-device
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard-device-app
+  template:
+    metadata:
+      labels:
+        app: dashboard-device-app
+    spec:
+      containers:
+        - image: eteration/muto-dashboard-device:v20221015
+          imagePullPolicy: IfNotPresent
+          name: dashboard-device
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: http
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-stack
+spec:
+  selector:
+    app: dashboard-stack-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard-stack-app
+  template:
+    metadata:
+      labels:
+        app: dashboard-stack-app
+    spec:
+      containers:
+        - image: eteration/muto-dashboard-stack:v20221015
+          imagePullPolicy: IfNotPresent
+          name: dashboard-stack
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: http
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: composiv-dashboard-ingress
+spec:
+  rules:
+  - host: dashboard.composiv.ai
+    http:
+      paths:
+      - backend:
+          service:
+            name: dashboard
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer:
+    ingress:
+    - ip: 52.149.26.92

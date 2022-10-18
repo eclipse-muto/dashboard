@@ -22,11 +22,11 @@ services:
         - muto-cloud
 
   dashboard:
-    image: eclipse-muto/dashboard:latest
+    image: eteration/muto-dashboard:v20221018
     environment:
       NODE_ENV: PROD
     ports:
-      - 7000:80
+      - 7080:80
     networks:
         - muto-cloud
     links:

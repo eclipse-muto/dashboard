@@ -32,6 +32,8 @@ const Stack = props =>  <RemoteComponent form={{component: "Stack", from: "dashb
 const Vehicle = props =>  <RemoteComponent form={{component: "Vehicle", from: "dashboard-device"}} {...props} />
 const VehicleDetail = props =>  <RemoteComponent form={{component: "VehicleDetail", from: "dashboard-device"}} {...props} />
 const VehicleStack = props =>  <RemoteComponent form={{component: "VehicleStack", from: "dashboard-device"}} {...props} />
+const VehicleTelemetry = props =>  <RemoteComponent form={{component: "VehicleTelemetry", from: "dashboard-device"}} {...props} />
+
 const TopicEcho= props =>  <RemoteComponent  form={{component: "TopicEcho", from: "dashboard-device"}}  {...props} />
 const TopicList= props =>  <RemoteComponent  form={{component: "TopicList", from: "dashboard-device"}}  {...props} />
 const TopicDetail= props =>  <RemoteComponent  form={{component: "TopicDetail", from: "dashboard-device"}}  {...props} />
@@ -100,6 +102,14 @@ const routes: any[] = [
     //label: 'Vehicle Stacks',
     path: '/vehicle/:thingid/stacks',
     title: 'Eclipse Muto | Vehicle Stack Management',
+  },
+  {
+    component:VehicleTelemetry,
+    exact: true,
+    isAsync: true,
+    //label: 'Vehicle ros actions',
+    path: '/vehicle/:thingid/telemetry',
+    title: 'Eclipse Muto | Telemetry',
   },
   {
     component:TopicList,

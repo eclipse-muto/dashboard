@@ -28,7 +28,7 @@ spec:
         app: dashboard-app
     spec:
       containers:
-        - image: eteration/muto-dashboard:v202210181705
+        - image: eteration/muto-dashboard:v202210201010
           imagePullPolicy: Always
           name: dashboard
           ports:
@@ -65,7 +65,7 @@ spec:
         app: dashboard-device-app
     spec:
       containers:
-        - image: eteration/muto-dashboard-device:v20221015
+        - image: eteration/muto-dashboard-device:v202210192255
           imagePullPolicy: IfNotPresent
           name: dashboard-device
           ports:

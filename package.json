@@ -45,7 +45,7 @@
     "docker-run": "docker run --rm -it -p 3001:80 eclipse-muto/dashboard:latest",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://sandbox.composiv.ai",
+  "proxy": "https://sandbox.composiv.ai",
   "eslintConfig": {
     "extends": [
       "react-app",

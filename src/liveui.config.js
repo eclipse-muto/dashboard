@@ -13,7 +13,10 @@
 // Contributors:
 //    Composiv.ai, Eteration A.S. - initial API and implementation
 //
+
+
 //
+const timestamp = (new Date()).getTime()
 const config = {
     shares: {
         react: require('react'),
@@ -22,16 +25,16 @@ const config = {
         'react-dom': require('react-dom'),
         'react-router-dom': require('react-router-dom'),
         "@patternfly/react-core": require('@patternfly/react-core'),
-        "@patternfly/react-icons":require('@patternfly/react-icons'),
-        "@patternfly/react-table":require('@patternfly/react-table'),
+        "@patternfly/react-icons": require('@patternfly/react-icons'),
+        "@patternfly/react-table": require('@patternfly/react-table'),
 
         "react-i18next": require('react-i18next'),
         "i18next": require('i18next'),
         "uuid": require('uuid'),
     },
     remotes: {
-        "dashboard-device": global.__DEV__  ? 'http://localhost:5005/dashboard-device' : '/dashboard-device',
-        "dashboard-stack":  global.__DEV__  ? 'http://localhost:5006/dashboard-stack' : '/dashboard-stack',
+        "dashboard-device": global.__DEV__ ? 'http://localhost:5005/dashboard-device' : `/dashboard-device?${timestamp}`,
+        "dashboard-stack": global.__DEV__ ? 'http://localhost:5006/dashboard-stack' : `/dashboard-stack?${timestamp}`,
     },
 }
 

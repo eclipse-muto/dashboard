@@ -65,8 +65,8 @@ spec:
         app: dashboard-device-app
     spec:
       containers:
-        - image: eteration/muto-dashboard-device:v202210192255
-          imagePullPolicy: IfNotPresent
+        - image: composiv/dashboard-device:latest
+          imagePullPolicy: Always
           name: dashboard-device
           ports:
             - containerPort: 80
@@ -102,8 +102,8 @@ spec:
         app: dashboard-stack-app
     spec:
       containers:
-        - image: eteration/muto-dashboard-stack:v20221015
-          imagePullPolicy: IfNotPresent
+        - image: composiv/dashboard-stack:latest
+          imagePullPolicy: Always
           name: dashboard-stack
           ports:
             - containerPort: 80
@@ -115,6 +115,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-clusterissuer
     kubernetes.io/ingress.class: nginx
   name: composiv-dashboard-ingress
 spec:
@@ -129,7 +130,7 @@ spec:
               number: 80
         path: /
         pathType: Prefix
-status:
-  loadBalancer:
-    ingress:
-    - ip: 52.149.26.92
+  tls:
+  - hosts:
+    - dashboard.composiv.ai
+    secretName: composiv-cert-secret

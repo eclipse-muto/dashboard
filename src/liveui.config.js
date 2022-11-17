@@ -25,7 +25,6 @@ const config = {
         'react-dom': require('react-dom'),
         'react-router-dom': require('react-router-dom'),
         "@patternfly/react-core": require('@patternfly/react-core'),
-        "@patternfly/react-icons": require('@patternfly/react-icons'),
         "@patternfly/react-table": require('@patternfly/react-table'),
 
         "react-i18next": require('react-i18next'),

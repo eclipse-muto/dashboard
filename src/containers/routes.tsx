@@ -22,7 +22,6 @@ import NotFound from './NotFound';
 
 
 import { useDocumentTitle } from '../utils/useDocumentTitle';
-import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 import RemoteComponent from '@eclipse-muto/liveui-react';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Home from './Home';
@@ -190,15 +189,14 @@ const routes: any[] = [
 // after a view has loaded so that subsequent press of tab key
 // sends focus directly to relevant content
 const useA11yRouteChange = (isAsync: boolean) => {
-  const lastNavigation = useLastLocation();
   React.useEffect(() => {
-    if (!isAsync && lastNavigation !== null) {
+    if (!isAsync !== null) {
       routeFocusTimer = accessibleRouteChangeHandler();
     }
     return () => {
       window.clearTimeout(routeFocusTimer);
     };
-  }, [isAsync, lastNavigation]);
+  }, [isAsync]);
 };
 
 const RouteWithTitleUpdates = ({ component: Component, isAsync = false, title, ...rest }: IAppRoute) => {
@@ -223,21 +221,18 @@ const flattenedRoutes: IAppRoute[] = routes.reduce(
 );
 
 const AppRoutes = (): React.ReactElement => (
-  <LastLocationProvider>
     <Switch>
       {flattenedRoutes.map(({ path, exact, component, title, isAsync }, idx) => (
         <RouteWithTitleUpdates
           path={path}
           exact={exact}
           component={component}
-          key={idx}
           title={title}
           isAsync={isAsync}
         />
       ))}
       <PageNotFound title="404 Page Not Found" />
     </Switch>
-  </LastLocationProvider>
 );
 
 export { AppRoutes, routes };

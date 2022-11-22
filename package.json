@@ -3,28 +3,55 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.7.0",
     "@eclipse-muto/liveui-core": "^0.2.0",
     "@eclipse-muto/liveui-react": "^0.2.0",
     "@patternfly/patternfly": "^4.159.1",
     "@patternfly/react-core": "^4.175.4",
     "@patternfly/react-table": "^4.44.4",
-    "apollo-link-error": "^1.1.13",
-    "apollo-link-rest": "^0.9.0-rc.1",
-    "graphql": "^15.8.0",
+    "@tanstack/query-sync-storage-persister": "^4.15.1",
+    "@tanstack/react-query": "^4.16.1",
+    "@tanstack/react-query-persist-client": "^4.16.1",
+    "axios": "^1.1.3",
+    "buffer": "^6.0.3",
     "i18next": "^21.5.4",
+    "mqtt-react-hooks": "^2.0.3",
+    "process": "^0.11.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-i18next": "^11.14.3",
-    "react-query": "^3.39.1",
     "react-router": "^5.3.3",
     "react-router-dom": "^5.3.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.1.2",
+    "url": "^0.11.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
+  "engines": {
+    "node": ">=10"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "ignorePatterns": [
+      "liveui.config.js",
+      ".eslintrc.js",
+      "build/**/*.*",
+      "dist/**/*.*",
+      "docker/**",
+      "internals/**"
+    ]
+  },
   "scripts": {
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix .",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -34,12 +61,6 @@
     "eject": "react-scripts eject"
   },
   "proxy": "https://sandbox.composiv.ai",
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -67,6 +88,7 @@
     "@types/uuid": "^8.3.3",
     "http-proxy-middleware": "^2.0.1",
     "source-map-explorer": "^2.5.3",
+    "typescript": "^4.1.2",
     "webpack": "4.44.2"
   }
 }

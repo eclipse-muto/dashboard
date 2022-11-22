@@ -15,28 +15,39 @@
 //
 //
 import './App.css';
+import { createContext } from "react";
+import {
+
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import {
   BrowserRouter as Router,
 } from "react-router-dom";
 
 import { AppLayout } from './components/AppLayout';
 import { AppRoutes } from './containers/routes';
-import { ApolloProvider } from '@apollo/client';
-import { apolloClient } from './api/client';
-import {QueryClient, QueryClientProvider} from "react-query";
+import { Connector } from 'mqtt-react-hooks';
+
+export const MQTTContext = createContext({})
+
+
+
+// const queryClient = new QueryClient()
+// const qcContext = createContext<QueryClient>(queryClient)
+
+const queryClient = new QueryClient()
 
 export default function App() {
-  const queryClient = new QueryClient();
-
   return (
     <QueryClientProvider client={queryClient}>
-      <ApolloProvider client={apolloClient}>
+      <Connector brokerUrl="wss://sandbox.composiv.ai:443/ws" options={{ protocolVersion: 5 }}>
         <Router>
           <AppLayout>
             <AppRoutes />
           </AppLayout>
         </Router>
-      </ApolloProvider>
+      </Connector>
     </QueryClientProvider>
-  );
+  )
 }

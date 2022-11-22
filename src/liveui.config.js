@@ -16,20 +16,25 @@
 
 
 //
+import axios from 'axios'
+import React from 'react'
+import * as RQ from '@tanstack/react-query'
+
 const timestamp = (new Date()).getTime()
 const config = {
     shares: {
-        react: require('react'),
-        '@apollo/client': require('@apollo/client'),
-        "graphql": require('graphql'),
+        'axios': axios,
+        react: React,
         'react-dom': require('react-dom'),
         'react-router-dom': require('react-router-dom'),
         "@patternfly/react-core": require('@patternfly/react-core'),
         "@patternfly/react-table": require('@patternfly/react-table'),
-
+        '@tanstack/react-query': RQ,
         "react-i18next": require('react-i18next'),
         "i18next": require('i18next'),
         "uuid": require('uuid'),
+        "mqtt": require('mqtt'),
+        "mqtt-react-hooks": require('mqtt-react-hooks')
     },
     remotes: {
         "dashboard-device": global.__DEV__ ? 'http://localhost:5005/dashboard-device' : `/dashboard-device?${timestamp}`,

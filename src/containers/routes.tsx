@@ -14,7 +14,7 @@
 //    Composiv.ai, Eteration A.S. - initial API and implementation
 //
 //
-import * as React from 'react';
+import React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { accessibleRouteChangeHandler } from '../utils/utils';
 
@@ -33,7 +33,6 @@ const VehicleDetail = props =>  <RemoteComponent form={{component: "VehicleDetai
 const VehicleStack = props =>  <RemoteComponent form={{component: "VehicleStack", from: "dashboard-device"}} {...props} />
 const VehicleTelemetry = props =>  <RemoteComponent form={{component: "VehicleTelemetry", from: "dashboard-device"}} {...props} />
 
-const TopicEcho= props =>  <RemoteComponent  form={{component: "TopicEcho", from: "dashboard-device"}}  {...props} />
 const TopicList= props =>  <RemoteComponent  form={{component: "TopicList", from: "dashboard-device"}}  {...props} />
 const TopicDetail= props =>  <RemoteComponent  form={{component: "TopicDetail", from: "dashboard-device"}}  {...props} />
 const NodeList= props =>  <RemoteComponent  form={{component: "NodeList", from: "dashboard-device"}}  {...props} />
@@ -127,14 +126,6 @@ const routes: any[] = [
     title: 'Eclipse Muto | Ros Topic Detail',
   },
   {
-    component: TopicEcho,
-    exact: true,
-    isAsync: true,
-    //label: 'Vehicle ros actions',
-    path: '/vehicle/:thingid/echo',
-    title: 'Eclipse Muto | Ros Topic Echo',
-  },
-  {
     component: NodeList,
     exact: true,
     isAsync: true,
@@ -204,7 +195,7 @@ const RouteWithTitleUpdates = ({ component: Component, isAsync = false, title, .
   useDocumentTitle(title);
 
   function routeWithTitle(routeProps: RouteComponentProps) {
-    return <> <Breadcrumbs /><Component {...rest} {...routeProps} /></>;
+    return <><Breadcrumbs /><Component {...rest} {...routeProps} /></>;
   }
 
   return <Route render={routeWithTitle} {...rest} />;
@@ -229,6 +220,7 @@ const AppRoutes = (): React.ReactElement => (
           component={component}
           title={title}
           isAsync={isAsync}
+          key={title}
         />
       ))}
       <PageNotFound title="404 Page Not Found" />

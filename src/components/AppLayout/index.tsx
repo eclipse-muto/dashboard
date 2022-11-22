@@ -16,7 +16,10 @@
 //
 import * as React from 'react';
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
+import { useMqttState } from 'mqtt-react-hooks';
+
 import {
+  Label,
   Nav,
   NavList,
   NavItem,
@@ -37,6 +40,8 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   const [isNavOpen, setIsNavOpen] = React.useState(true);
   const [isMobileView, setIsMobileView] = React.useState(true);
   const [isNavOpenMobile, setIsNavOpenMobile] = React.useState(false);
+  const { connectionStatus } = useMqttState();
+
   const onNavToggleMobile = () => {
     setIsNavOpenMobile(!isNavOpenMobile);
   };
@@ -59,7 +64,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
 
   const Header = (
     <PageHeader
-      logo={<LogoImg />}
+      logo={<LogoImg /> }
       showNavToggle
       isNavOpen={isNavOpen}
       onNavToggle={isMobileView ? onNavToggleMobile : onNavToggle}
@@ -122,6 +127,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
       sidebar={Sidebar}
       onPageResize={onPageResize}
       skipToContent={PageSkipToContent}>
+      <Label color={connectionStatus === "Connected" ? "green" : "orange"} icon={<i className={connectionStatus === "Connected" ? "pf-icon-connected" : "pf-icon-disconnected"}></i>} >Status:{connectionStatus} (sandbox)</Label>
       {children}
     </Page>
   );
